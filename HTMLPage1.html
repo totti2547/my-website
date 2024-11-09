@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบประเมินความคิดสร้างสรรค์</title>
+    <style>
+        /* สไตล์ฟอร์ม */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 100%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #ff8b94;
+            color: #fff;
+            font-weight: bold;
+        }
+        td {
+            background-color: #ffe0e5;
+            color: #333;
+        }
+        tr:nth-child(even) td {
+            background-color: #ffccd5;
+        }
+        input[type="radio"] {
+            transform: scale(1.3);
+            cursor: pointer;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #ff8b94;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #ff5c65;
+            transform: translateY(-3px);
+        }
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        #totalScore {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+            background-color: #ffe0e5;
+            padding: 10px;
+            border-radius: 8px;
+            display: none; /* ซ่อนผลคะแนนเริ่มต้น */
+        }
+        #grade {
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+            display: none; /* ซ่อนเกณฑ์คะแนนเริ่มต้น */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>แบบประเมินความคิดสร้างสรรค์ในการออกแบบสื่อสิ่งพิมพ์</h2>
+        
+        <!-- ช่องใส่ชื่อและนามสกุล -->
+        <p>กรุณากรอกชื่อและนามสกุลของคุณ:</p>
+        <input type="text" id="fullName" placeholder="ชื่อ นามสกุล" oninput="checkAllAnswered()">
+        
+        <p>กรุณาเลือกคะแนนสำหรับแต่ละหัวข้อ (คะแนนรวมสูงสุด: 20 คะแนน)</p>
+        
+        <table>
+            <tr>
+                <th>ข้อที่</th>
+                <th>หัวข้อการประเมิน</th>
+                <th>4 (ดีมาก)</th>
+                <th>3 (ดี)</th>
+                <th>2 (พอใช้)</th>
+                <th>1 (ปรับปรุง)</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>ความคิดริเริ่ม (Originality)</td>
+                <td><input type="radio" name="q1" value="4" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q1" value="3" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q1" value="2" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q1" value="1" onchange="checkAllAnswered()"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>ความยืดหยุ่นในการคิด (Flexibility)</td>
+                <td><input type="radio" name="q2" value="4" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q2" value="3" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q2" value="2" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q2" value="1" onchange="checkAllAnswered()"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>ความคล่องตัวในการคิด (Fluency)</td>
+                <td><input type="radio" name="q3" value="4" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q3" value="3" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q3" value="2" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q3" value="1" onchange="checkAllAnswered()"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>การปรับปรุงรายละเอียด (Elaboration)</td>
+                <td><input type="radio" name="q4" value="4" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q4" value="3" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q4" value="2" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q4" value="1" onchange="checkAllAnswered()"></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>การตีความ (Redefinition)</td>
+                <td><input type="radio" name="q5" value="4" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q5" value="3" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q5" value="2" onchange="checkAllAnswered()"></td>
+                <td><input type="radio" name="q5" value="1" onchange="checkAllAnswered()"></td>
+            </tr>
+        </table>
+        
+        <button onclick="submitForm()">คำนวณคะแนนรวม</button>
+        <h3 id="totalScore">คะแนนรวม: 0/20</h3>
+        <h3 id="grade"></h3>
+    </div>
+
+    <script>
+        function checkAllAnswered() {
+            let totalScore = 0;
+            let allAnswered = true;
+            for (let i = 1; i <= 5; i++) {
+                const score = document.querySelector(`input[name="q${i}"]:checked`);
+                if (!score) {
+                    allAnswered = false;
+                } else {
+                    totalScore += parseInt(score.value);
+                }
+            }
+
+            // ตรวจสอบว่าผู้ใช้กรอกข้อมูลครบแล้ว
+            const fullName = document.getElementById('fullName').value;
+            if (fullName && allAnswered) {
+                document.querySelector("button").disabled = false;
+            } else {
+                document.querySelector("button").disabled = true;
+            }
+        }
+
+        function submitForm() {
+            const fullName = document.getElementById('fullName').value;
+            let totalScore = 0;
+            let scores = [];
+            for (let i = 1; i <= 5; i++) {
+                const score = document.querySelector(`input[name="q${i}"]:checked`);
+                if (score) {
+                    scores.push(score.value);
+                    totalScore += parseInt(score.value);
+                }
+            }
+
+            // แสดงคะแนนรวมและเกณฑ์คะแนน
+            document.getElementById('totalScore').innerText = `คะแนนรวม: ${totalScore}/20`;
+            let gradeText = '';
+            if (totalScore >= 16 && totalScore <= 20) {
+                gradeText = 'ดีมาก: มีความคิดริเริ่มสูงมากและยืดหยุ่นในการแก้ปัญหา';
+            } else if (totalScore >= 11 && totalScore <= 15) {
+                gradeText = 'ดี: มีความคิดริเริ่มและสามารถคิดได้หลายมุมมอง';
+            } else if (totalScore >= 6 && totalScore <= 10) {
+                gradeText = 'พอใช้: มีความคิดสร้างสรรค์ในระดับพอใช้';
+            } else if (totalScore >= 1 && totalScore <= 5) {
+                gradeText = 'ปรับปรุง: ควรพัฒนาทักษะในการคิดริเริ่มและยืดหยุ่นมากขึ้น';
+            } else {
+                gradeText = 'กรุณาเลือกคะแนนในแต่ละข้อ';
+            }
+
+            document.getElementById('grade').innerText = `ผลการประเมิน: ${gradeText}`;
+
+            // แสดงผลลัพธ์
+            document.getElementById('totalScore').style.display = 'block';
+            document.getElementById('grade').style.display = 'block';
+
+            // ส่งข้อมูลไปที่ Google Apps Script
+            fetch('https://script.google.com/macros/s/AKfycbz_pDmjqy48CmE-8NzgkEFokN3otHPxysP90cLiUGJ7bu_GKBiVMYM-8W2mCNLK9AOr/exec', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    'fullName': fullName,
+                    'q1': scores[0],
+                    'q2': scores[1],
+                    'q3': scores[2],
+                    'q4': scores[3],
+                    'q5': scores[4],
+                    'totalScore': totalScore
+                })
+            })
+            .then(response => response.text())
+            .then(data => alert("บันทึกข้อมูลสำเร็จ"))
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
